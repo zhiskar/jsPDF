@@ -1697,7 +1697,7 @@ function jsPDF(/** String */ orientation, /** String */ unit, /** String */ form
 					return API.output('dataurlnewwindow');
 				}
 
-				var bb = new BlobBuilder;
+				var bb = new BlobBuilderJS;
 				var data = buildDocument();
 
 				// Need to add the file to BlobBuilder as a Uint8Array
@@ -1708,7 +1708,15 @@ function jsPDF(/** String */ orientation, /** String */ unit, /** String */ form
 					array[i] = data.charCodeAt(i);
 				}
 
-				bb.append(array);
+				if (! $.browser.msie) {
+					var blob_data = new Blob([ array ], { type: 'application/pdf'});
+					var url = URL.createObjectURL(blob_data);
+					document.location.href = url;
+					return;
+				} else {
+					bb.append(array);
+
+				}
 
 				var blob = bb.getBlob('application/pdf');
 				saveAs(blob, options);
