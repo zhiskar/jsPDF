@@ -1,5 +1,5 @@
 {
-  "name": "jspdf",
+  "name": "zhiskar-jspdf",
   "version": "1.4.1",
   "homepage": "https://github.com/mrrio/jspdf",
   "description": "PDF Document creation from JavaScript",
